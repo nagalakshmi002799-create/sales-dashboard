@@ -96,10 +96,56 @@ body {
   border-radius: 1.5rem;
   overflow: hidden;
   border: 1px solid rgba(22, 28, 66, 0.08);
+  animation: fadeInUp 0.8s ease both;
 }
 
 .hero-card .card-body {
   padding: 2rem;
+}
+
+.banner-card,
+.chart-card,
+.section-card,
+.topbar,
+.summary-card,
+.performance-item,
+.small-panel {
+  animation: fadeInUp 0.8s ease both;
+}
+
+.dashboard-summary .col-12:nth-child(1) .summary-card {
+  animation-delay: 0.1s;
+}
+
+.dashboard-summary .col-12:nth-child(2) .summary-card {
+  animation-delay: 0.2s;
+}
+
+.dashboard-summary .col-12:nth-child(3) .summary-card {
+  animation-delay: 0.3s;
+}
+
+.dashboard-summary .col-12:nth-child(4) .summary-card {
+  animation-delay: 0.4s;
+}
+
+.summary-card,
+.chart-card,
+.section-card,
+.banner-card,
+.topbar,
+.small-panel {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.summary-card:hover,
+.chart-card:hover,
+.section-card:hover,
+.banner-card:hover,
+.topbar:hover,
+.small-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
 }
 
 .banner-card {
@@ -223,8 +269,13 @@ body {
   font-weight: 600;
 }
 
+.table tbody tr {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
 .table tbody tr:hover {
   background-color: rgba(95, 116, 255, 0.08);
+  transform: translateX(2px);
 }
 
 .section-card .card-body {
@@ -233,6 +284,17 @@ body {
 
 .sidebar .btn-link {
   text-decoration: none;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 1140px) {

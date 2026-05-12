@@ -75,7 +75,7 @@ function App() {
             <div className="col-12 col-xl-7">
               <DashboardHeader
                 title="Sales Dashboard"
-                description="Monitor user growth, city filters, and customer performance with Redux-managed data."
+                description="Monitor user growth, city filters, and customer performance with live dashboard data."
               />
             </div>
             <div className="col-12 col-xl-5">
