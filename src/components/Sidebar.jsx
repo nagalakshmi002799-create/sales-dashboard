@@ -43,8 +43,9 @@ export default function Sidebar({ activeSection = 'overview', collapsed = false,
 
       <div className="sidebar-footer mt-auto pt-4 border-top border-white-10 text-white-50">
         {!collapsed && <p className="small mb-2">Need help with dashboard?</p>}
-        <button type="button" className="btn btn-outline-light btn-sm">
-          Support
+        <button type="button" className="support-btn btn d-flex align-items-center justify-content-center gap-2 w-100">
+          <span className="support-icon">{collapsed ? 'S' : '?'}</span>
+          {!collapsed && <span className="support-text">Support</span>}
         </button>
       </div>
     </aside>

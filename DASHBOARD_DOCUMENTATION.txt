@@ -16,10 +16,12 @@ Approach
 Components
 ----------
 - `src/components/Sidebar.jsx`
-  - Contains the navigation panel and collapse/expand button.
-  - Supports `collapsed` mode, which shrinks the sidebar and hides text labels.
-  - Displays icon placeholders for each nav item and an accessible toggle button.
-  - Keeps the support action visible even in compact mode.
+  - Contains the navigation panel with logo-based collapse/expand.
+  - The "AD" logo button triggers sidebar collapse/expand on desktop (>991px).
+  - Supports `collapsed` mode, which shrinks the sidebar to 96px and hides text labels.
+  - Displays icon placeholders for each nav item using their first letter.
+  - Support button shows as "?" in expanded mode and "S" in collapsed mode.
+  - On mobile (<991px), the sidebar is always full-width and expanded for better usability.
 
 - `src/App.jsx`
   - Hosts the main dashboard layout and application shell.
@@ -37,9 +39,16 @@ Components
 Functionality
 -------------
 - Sidebar collapse and expand:
-  - A toggle button in the sidebar header switches `sidebarCollapsed`.
-  - When collapsed, sidebar width reduces and labels hide, improving workspace width.
-  - Navigation still works with icons and accessible labels.
+  - Click the "AD" logo button to toggle `sidebarCollapsed` state on desktop (>991px).
+  - When collapsed, sidebar shrinks from 280px to 96px smoothly.
+  - Text labels and branding info hide; icons remain visible.
+  - Support button displays "S" icon when collapsed, full text when expanded.
+  - On mobile (<991px), collapse state is disabled and sidebar is always full-width.
+
+- Support button styling:
+  - Expanded: shows full "Support" text with "?" icon
+  - Collapsed (desktop only): shows compact "S" icon matching nav items
+  - Hover state: slight background color change for visual feedback
 
 - Section navigation:
   - Each sidebar item scrolls the matching dashboard section into view with `scrollIntoView({ behavior: 'smooth' })`.
@@ -49,52 +58,71 @@ Functionality
   - The button appears after the user scrolls down and uses `window.scrollTo({ top: 0, behavior: 'smooth' })`.
 
 - Responsive behavior:
-  - Desktop uses a side-by-side grid layout.
-  - On tablet and mobile screens, the layout becomes single-column.
-  - The sidebar becomes full-width and easier to interact with on small devices.
-  - Spacing, button sizes, and card radii adapt for smaller screens.
+  - Desktop (>991px): Two-column grid with collapsible sidebar (collapse only at this breakpoint).
+  - Tablet/Mobile (<991px): Single-column layout with full-width, always-expanded sidebar.
+  - Content area automatically expands when sidebar collapses on desktop.
+  - All interactive elements adapt sizing and spacing for smaller screens.
 
 CSS and Styling
 ---------------
 - `src/App.css`
   - `.app-shell`
-    - Uses CSS grid for stable two-column layout.
-    - Changes to one-column mode below 991px.
+    - Uses CSS grid with `grid-template-columns: auto 1fr` for responsive layout.
+    - Grid adapts: `auto 1fr` (desktop), `240px 1fr` (1199px and below), `1fr` (991px and below).
+    - Sidebar width animates smoothly between 280px (expanded) and 96px (collapsed).
 
   - `.sidebar`
-    - Gradient background and rounded shape for strong visual hierarchy.
-    - Smooth transition for width changes when collapsed.
+    - Gradient background (dark blue) and rounded shape for visual hierarchy.
+    - Smooth transitions for width changes.
+    - Min-height ensures proper proportions on all screen sizes.
 
-  - `.sidebar-collapsed`
-    - Shrinks the sidebar to a compact width.
-    - Hides the label text and support description.
-    - Centers icon-only navigation buttons.
+  - `.sidebar-logo-btn`
+    - Clickable button styled with purple background.
+    - Hover effect: color change and slight scale increase.
+    - Triggers collapse/expand toggling on desktop only.
 
-  - `.nav-icon`
-    - Provides a consistent visual anchor for nav items.
-    - Maintains clarity in collapsed mode.
+  - `.sidebar-collapsed` (desktop only)
+    - Shrinks sidebar to compact width.
+    - Hides text labels and branding info.
+    - Centers icon-only nav buttons.
+
+  - `.support-btn` and `.support-icon`
+    - Support button has semi-transparent background with light border.
+    - Icon displays "?" (expanded) or "S" (collapsed).
+    - On mobile, always shows full text "Support".
+
+  - `.nav-icon` and `.nav-text`
+    - Icons provide visual anchors for nav items.
+    - Text hides in collapsed mode on desktop.
+    - Always visible on mobile.
 
   - `.back-to-top`
-    - Fixed position with large enough touch target.
-    - Visible on scroll and styled to stand out without disrupting the dashboard.
+    - Fixed position button (bottom-right).
+    - Smooth scroll to top animation.
+    - Responsive positioning for different screen sizes.
 
   - Media queries
-    - `max-width: 1199px`: keeps a slightly smaller sidebar for narrower large screens.
-    - `max-width: 991px`: switches to a mobile-first single-column layout.
-    - `max-width: 767px`: adjusts padding and button placement for compact devices.
+    - `@media (max-width: 1199px)`: sidebar reduces to 240px for narrower desktops.
+    - `@media (max-width: 991px)`: switches to single-column, disables collapse feature.
+    - `@media (max-width: 767px)`: adjusts padding, radius, and button placement.
 
 Best Practices Followed
 -----------------------
-- Separation of concerns: layout and behavior are split between `App.jsx` and `Sidebar.jsx`.
-- Accessible UI: buttons use clear labels and the sidebar toggle is keyboard operable.
-- Smooth scrolling: navigation feels natural for long dashboard pages.
-- Responsive design: adapt layout and controls to different device sizes.
-- Maintainable CSS: new utility classes are isolated and documented.
+1. **Responsive Design**: Desktop collapse feature disabled on mobile to avoid confusion.
+2. **Accessible UI**: Logo button has clear aria-label and title. All nav items keyboard-operable.
+3. **Visual Hierarchy**: Logo and nav icons provide consistent visual anchors in all modes.
+4. **CSS Grid**: Flexible `auto 1fr` layout ensures content flows naturally when sidebar width changes.
+5. **State Management**: `sidebarCollapsed` state managed in App.jsx, passed down to Sidebar component.
+6. **Smooth Animations**: CSS transitions on width and hover states for polished interactions.
+7. **Maintainable Code**: Separate component for Sidebar, isolated CSS classes for each feature.
+8. **Mobile-First Approach**: Sidebar always expanded on small screens for usability.
 
 Result
 ------
 The dashboard now provides:
-- a collapsible sidebar for cleaner workspace,
-- a convenient back-to-top action for long pages,
-- responsive behavior across desktop, tablet, and mobile,
-- and a stronger user experience for both navigation and content focus.
+- **Desktop collapse feature**: Click AD logo to toggle sidebar (280px ↔ 96px) with adaptive content area
+- **Support button styling**: Shows "?" in expanded mode, "S" icon in collapsed mode
+- **True responsive layout**: Content properly visible in all sidebar states on desktop
+- **Mobile optimization**: Full-width sidebar always expanded on mobile for better touch interaction
+- **Smooth animations**: All state transitions are animated for polished UX
+- **Accessible**: Keyboard navigation and proper ARIA labels throughout

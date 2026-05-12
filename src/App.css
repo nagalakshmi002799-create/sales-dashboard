@@ -106,6 +106,51 @@ body {
   border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
+.support-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.88);
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+.support-btn:hover,
+.support-btn:focus {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+.support-icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.support-text {
+  flex: 1;
+  text-align: left;
+}
+
+.sidebar.sidebar-collapsed .support-btn {
+  justify-content: center;
+  padding: 0.75rem;
+  width: auto;
+}
+
+.sidebar.sidebar-collapsed .support-icon {
+  margin: 0;
+}
+
 .nav-icon {
   width: 36px;
   height: 36px;
@@ -127,10 +172,6 @@ body {
   border-radius: 9999px;
   padding: 0.85rem 1rem;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
-}
-
-.main-content {
-  background: transparent;
 }
 
 @media (max-width: 1199px) {
@@ -165,6 +206,20 @@ body {
     justify-content: flex-start;
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .sidebar.sidebar-collapsed .support-btn {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0.75rem 1rem;
+  }
+
+  .sidebar.sidebar-collapsed .support-icon {
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    background: none;
+    min-width: 0;
   }
 
   .main-content {
