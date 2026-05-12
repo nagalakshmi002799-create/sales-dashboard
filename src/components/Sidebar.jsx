@@ -1,4 +1,4 @@
-export default function Sidebar({ activeSection = 'overview', onNavigate }) {
+export default function Sidebar({ activeSection = 'overview', collapsed = false, onNavigate, onToggle }) {
   const navItems = [
     { key: 'overview', label: 'Overview' },
     { key: 'customers', label: 'Customers' },
@@ -7,13 +7,20 @@ export default function Sidebar({ activeSection = 'overview', onNavigate }) {
   ]
 
   return (
-    <aside className="sidebar d-flex flex-column p-4 text-white">
-      <div className="sidebar-brand mb-4">
-        <div className="sidebar-logo d-inline-flex align-items-center justify-content-center mb-3">AD</div>
-        <div>
-          <h2 className="h5 text-white mb-1">Aforro</h2>
-          <p className="text-white-50 small mb-0">Sales dashboard</p>
+    <aside className={`sidebar d-flex flex-column p-4 text-white ${collapsed ? 'sidebar-collapsed' : ''}`}>
+      <div className="d-flex align-items-center justify-content-between mb-4 sidebar-brand">
+        <div className="d-flex align-items-center gap-3">
+          <div className="sidebar-logo d-inline-flex align-items-center justify-content-center">AD</div>
+          {!collapsed && (
+            <div className="sidebar-brand-info">
+              <h2 className="h5 text-white mb-1">Aforro</h2>
+              <p className="text-white-50 small mb-0">Sales dashboard</p>
+            </div>
+          )}
         </div>
+        <button type="button" className="sidebar-toggle btn btn-sm btn-outline-light" onClick={onToggle} aria-label="Toggle sidebar">
+          {collapsed ? 'Open' : 'Collapse'}
+        </button>
       </div>
 
       <nav className="nav flex-column gap-2 mb-4">
@@ -21,16 +28,18 @@ export default function Sidebar({ activeSection = 'overview', onNavigate }) {
           <button
             key={item.key}
             type="button"
-            className={`nav-link btn btn-link text-start fw-semibold ${activeSection === item.key ? 'active' : 'text-white-75'}`}
+            className={`nav-link btn btn-link text-start d-flex align-items-center gap-3 ${activeSection === item.key ? 'active' : 'text-white-75'}`}
             onClick={() => onNavigate(item.key)}
+            aria-label={item.label}
           >
-            {item.label}
+            <span className="nav-icon">{item.label.charAt(0)}</span>
+            <span className="nav-text">{item.label}</span>
           </button>
         ))}
       </nav>
 
       <div className="sidebar-footer mt-auto pt-4 border-top border-white-10 text-white-50">
-        <p className="small mb-2">Need help with dashboard?</p>
+        {!collapsed && <p className="small mb-2">Need help with dashboard?</p>}
         <button type="button" className="btn btn-outline-light btn-sm">
           Support
         </button>
