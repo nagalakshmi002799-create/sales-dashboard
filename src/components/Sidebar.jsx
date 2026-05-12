@@ -8,19 +8,22 @@ export default function Sidebar({ activeSection = 'overview', collapsed = false,
 
   return (
     <aside className={`sidebar d-flex flex-column p-4 text-white ${collapsed ? 'sidebar-collapsed' : ''}`}>
-      <div className="d-flex align-items-center justify-content-between mb-4 sidebar-brand">
-        <div className="d-flex align-items-center gap-3">
-          <div className="sidebar-logo d-inline-flex align-items-center justify-content-center">AD</div>
-          {!collapsed && (
-            <div className="sidebar-brand-info">
-              <h2 className="h5 text-white mb-1">Aforro</h2>
-              <p className="text-white-50 small mb-0">Sales dashboard</p>
-            </div>
-          )}
-        </div>
-        <button type="button" className="sidebar-toggle btn btn-sm btn-outline-light" onClick={onToggle} aria-label="Toggle sidebar">
-          {collapsed ? 'Open' : 'Collapse'}
+      <div className="mb-4 sidebar-brand">
+        <button
+          type="button"
+          className="sidebar-logo-btn d-inline-flex align-items-center justify-content-center"
+          onClick={onToggle}
+          aria-label="Toggle sidebar"
+          title="Click to collapse/expand"
+        >
+          AD
         </button>
+        {!collapsed && (
+          <div className="sidebar-brand-info">
+            <h2 className="h5 text-white mb-1">Aforro</h2>
+            <p className="text-white-50 small mb-0">Sales dashboard</p>
+          </div>
+        )}
       </div>
 
       <nav className="nav flex-column gap-2 mb-4">
