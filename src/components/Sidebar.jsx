@@ -1,5 +1,10 @@
-export default function Sidebar() {
-  const navItems = ['Overview', 'Customers', 'Analytics', 'Reports', 'Settings']
+export default function Sidebar({ activeSection = 'overview', onNavigate }) {
+  const navItems = [
+    { key: 'overview', label: 'Overview' },
+    { key: 'customers', label: 'Customers' },
+    { key: 'analytics', label: 'Analytics' },
+    { key: 'reports', label: 'Reports' },
+  ]
 
   return (
     <aside className="sidebar d-flex flex-column p-4 text-white">
@@ -13,8 +18,13 @@ export default function Sidebar() {
 
       <nav className="nav flex-column gap-2 mb-4">
         {navItems.map((item) => (
-          <button key={item} type="button" className="nav-link btn btn-link text-start text-white fw-semibold">
-            {item}
+          <button
+            key={item.key}
+            type="button"
+            className={`nav-link btn btn-link text-start fw-semibold ${activeSection === item.key ? 'active' : 'text-white-75'}`}
+            onClick={() => onNavigate(item.key)}
+          >
+            {item.label}
           </button>
         ))}
       </nav>
