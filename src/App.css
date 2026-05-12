@@ -11,8 +11,7 @@ body {
 }
 
 .app-shell {
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
   min-height: 100vh;
   gap: 1.5rem;
   padding: 1.5rem;
@@ -20,6 +19,7 @@ body {
 
 .sidebar {
   width: 280px;
+  flex-shrink: 0;
   background: linear-gradient(180deg, #1c2b57 0%, #17214a 100%);
   color: #ffffff;
   border-radius: 2rem;
@@ -29,21 +29,10 @@ body {
   transition: width 0.3s ease, min-height 0.3s ease;
 }
 
-.sidebar.sidebar-collapsed {
-  width: 96px;
-  min-height: calc(100vh - 3rem);
-}
-
-.sidebar.sidebar-collapsed .sidebar-brand-info,
-.sidebar.sidebar-collapsed .nav-text,
-.sidebar.sidebar-collapsed .sidebar-footer p {
-  display: none;
-}
-
-.sidebar.sidebar-collapsed .nav-link {
-  justify-content: center;
-  padding-left: 0.85rem;
-  padding-right: 0.85rem;
+.main-content {
+  flex: 1;
+  background: transparent;
+  min-width: 0;
 }
 
 .sidebar-brand {
@@ -175,10 +164,6 @@ body {
 }
 
 @media (max-width: 1199px) {
-  .app-shell {
-    grid-template-columns: 240px 1fr;
-  }
-
   .sidebar {
     width: 240px;
   }
@@ -189,10 +174,6 @@ body {
 }
 
 @media (max-width: 1075px) {
-  .app-shell {
-    grid-template-columns: 220px 1fr;
-  }
-
   .sidebar {
     width: 220px;
   }
@@ -203,10 +184,6 @@ body {
 }
 
 @media (max-width: 1005px) {
-  .app-shell {
-    grid-template-columns: 200px 1fr;
-  }
-
   .sidebar {
     width: 200px;
   }
@@ -218,7 +195,7 @@ body {
 
 @media (max-width: 991px) {
   .app-shell {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     padding: 1rem;
   }
 
