@@ -1,0 +1,100 @@
+Sales Dashboard Documentation
+============================
+
+Overview
+--------
+This document describes the recent dashboard improvements for the sales-dashboard project. The goal was to add a collapsible sidebar, a back-to-top action, and a responsive layout that works well on desktop, tablet, and mobile.
+
+Approach
+--------
+1. Maintain a clear two-column dashboard layout on desktop.
+2. Introduce a collapsible sidebar to increase workspace area and improve user focus.
+3. Add a fixed back-to-top button that appears when the user scrolls down.
+4. Use responsive media queries to adapt the layout for smaller viewports.
+5. Keep the implementation simple, accessible, and easy to maintain.
+
+Components
+----------
+- `src/components/Sidebar.jsx`
+  - Contains the navigation panel and collapse/expand button.
+  - Supports `collapsed` mode, which shrinks the sidebar and hides text labels.
+  - Displays icon placeholders for each nav item and an accessible toggle button.
+  - Keeps the support action visible even in compact mode.
+
+- `src/App.jsx`
+  - Hosts the main dashboard layout and application shell.
+  - Uses React state to manage:
+    - `sidebarCollapsed` for the sidebar toggling.
+    - `showBackToTop` for the back-to-top button visibility.
+    - `activeSection` for tracking the highlighted navigation item.
+  - Uses section refs to scroll smoothly to `overview`, `customers`, `analytics`, and `reports`.
+  - Adds a fixed `Back to top` button when the page scroll position passes a threshold.
+
+- `src/components/Topbar.jsx`
+  - Displays dashboard header text, refresh action, and profile summary.
+  - Uses responsive flex layout so actions wrap cleanly on narrow screens.
+
+Functionality
+-------------
+- Sidebar collapse and expand:
+  - A toggle button in the sidebar header switches `sidebarCollapsed`.
+  - When collapsed, sidebar width reduces and labels hide, improving workspace width.
+  - Navigation still works with icons and accessible labels.
+
+- Section navigation:
+  - Each sidebar item scrolls the matching dashboard section into view with `scrollIntoView({ behavior: 'smooth' })`.
+
+- Back-to-top feature:
+  - A `window` scroll listener updates `showBackToTop`.
+  - The button appears after the user scrolls down and uses `window.scrollTo({ top: 0, behavior: 'smooth' })`.
+
+- Responsive behavior:
+  - Desktop uses a side-by-side grid layout.
+  - On tablet and mobile screens, the layout becomes single-column.
+  - The sidebar becomes full-width and easier to interact with on small devices.
+  - Spacing, button sizes, and card radii adapt for smaller screens.
+
+CSS and Styling
+---------------
+- `src/App.css`
+  - `.app-shell`
+    - Uses CSS grid for stable two-column layout.
+    - Changes to one-column mode below 991px.
+
+  - `.sidebar`
+    - Gradient background and rounded shape for strong visual hierarchy.
+    - Smooth transition for width changes when collapsed.
+
+  - `.sidebar-collapsed`
+    - Shrinks the sidebar to a compact width.
+    - Hides the label text and support description.
+    - Centers icon-only navigation buttons.
+
+  - `.nav-icon`
+    - Provides a consistent visual anchor for nav items.
+    - Maintains clarity in collapsed mode.
+
+  - `.back-to-top`
+    - Fixed position with large enough touch target.
+    - Visible on scroll and styled to stand out without disrupting the dashboard.
+
+  - Media queries
+    - `max-width: 1199px`: keeps a slightly smaller sidebar for narrower large screens.
+    - `max-width: 991px`: switches to a mobile-first single-column layout.
+    - `max-width: 767px`: adjusts padding and button placement for compact devices.
+
+Best Practices Followed
+-----------------------
+- Separation of concerns: layout and behavior are split between `App.jsx` and `Sidebar.jsx`.
+- Accessible UI: buttons use clear labels and the sidebar toggle is keyboard operable.
+- Smooth scrolling: navigation feels natural for long dashboard pages.
+- Responsive design: adapt layout and controls to different device sizes.
+- Maintainable CSS: new utility classes are isolated and documented.
+
+Result
+------
+The dashboard now provides:
+- a collapsible sidebar for cleaner workspace,
+- a convenient back-to-top action for long pages,
+- responsive behavior across desktop, tablet, and mobile,
+- and a stronger user experience for both navigation and content focus.

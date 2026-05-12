@@ -29,6 +29,8 @@ import {
 function App() {
   const dispatch = useDispatch()
   const [activeSection, setActiveSection] = useState('overview')
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [showBackToTop, setShowBackToTop] = useState(false)
   const overviewRef = useRef(null)
   const customersRef = useRef(null)
   const analyticsRef = useRef(null)
@@ -48,8 +50,21 @@ function App() {
     dispatch(fetchUsers())
   }, [dispatch])
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 400)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   const handleRefresh = () => {
     dispatch(fetchUsers())
+  }
+
+  const handleToggleSidebar = () => {
+    setSidebarCollapsed((current) => !current)
   }
 
   const handleNavigate = (section) => {
@@ -66,7 +81,12 @@ function App() {
 
   return (
     <div className="app-shell">
-      <Sidebar activeSection={activeSection} onNavigate={handleNavigate} />
+      <Sidebar
+        activeSection={activeSection}
+        collapsed={sidebarCollapsed}
+        onNavigate={handleNavigate}
+        onToggle={handleToggleSidebar}
+      />
       <main className="main-content">
         <div className="container-fluid px-0">
           <Topbar onRefresh={handleRefresh} />
@@ -142,6 +162,16 @@ function App() {
             </div>
           </div>
         </div>
+
+        {showBackToTop && (
+          <button
+            type="button"
+            className="back-to-top btn btn-primary"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            Back to top
+          </button>
+        )}
       </main>
     </div>
   )
