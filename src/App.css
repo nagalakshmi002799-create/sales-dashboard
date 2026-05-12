@@ -1,0 +1,196 @@
+:root {
+  color: #111827;
+  background: #eef2fb;
+}
+
+body {
+  margin: 0;
+  background: #eef2fb;
+  min-height: 100vh;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.sidebar {
+  background: linear-gradient(180deg, #1c2b57 0%, #17214a 100%);
+  color: #ffffff;
+  border-radius: 2rem;
+  min-height: calc(100vh - 3rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand {
+  margin-bottom: 2rem;
+}
+
+.sidebar-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 1.25rem;
+  background: #7c8cff;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.88);
+  border-radius: 1rem;
+  padding: 1rem 1.1rem;
+  display: inline-flex;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.main-content {
+  background: transparent;
+}
+
+.topbar {
+  background: #ffffff;
+  border: 1px solid rgba(22, 28, 66, 0.08);
+  border-radius: 1.5rem;
+  padding: 1.2rem 1.4rem;
+}
+
+.topbar h2 {
+  margin: 0;
+}
+
+.profile-box {
+  background: #f8f9ff;
+  border: 1px solid rgba(22, 28, 66, 0.08);
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  font-size: 0.95rem;
+}
+
+.dashboard-hero {
+  margin-bottom: 1.5rem;
+}
+
+.banner-card {
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+.banner-card .card-body {
+  min-height: 100%;
+}
+
+.small-panel {
+  min-width: 120px;
+}
+
+.dashboard-header {
+  margin: 0;
+}
+
+.dashboard-header h1 {
+  font-size: clamp(2.2rem, 2.5vw, 3.2rem);
+  margin-bottom: 0.75rem;
+}
+
+.dashboard-header p {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.dashboard-summary {
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-summary .card {
+  border-radius: 1.5rem;
+  border: none;
+}
+
+.dashboard-summary .card-body {
+  min-height: 145px;
+}
+
+.performance-item {
+  background: #f8f9ff;
+  border-color: rgba(22, 28, 66, 0.08);
+}
+
+.section-card {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(22, 28, 66, 0.08);
+}
+
+.section-card .card-header {
+  border-bottom: 1px solid rgba(22, 28, 66, 0.08);
+}
+
+.table-responsive {
+  min-height: 1px;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  border-bottom: none;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(95, 116, 255, 0.08);
+}
+
+.section-card .card-body {
+  padding: 0;
+}
+
+.sidebar .btn-link {
+  text-decoration: none;
+}
+
+@media (max-width: 1140px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .app-shell {
+    padding: 1rem;
+  }
+
+  .sidebar {
+    min-height: auto;
+    border-radius: 1.5rem;
+  }
+
+  .topbar,
+  .banner-card,
+  .section-card,
+  .card {
+    border-radius: 1.25rem;
+  }
+}
