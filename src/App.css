@@ -178,6 +178,42 @@ body {
   .app-shell {
     grid-template-columns: 240px 1fr;
   }
+
+  .sidebar {
+    width: 240px;
+  }
+
+  .sidebar.sidebar-collapsed {
+    width: 96px;
+  }
+}
+
+@media (max-width: 1075px) {
+  .app-shell {
+    grid-template-columns: 220px 1fr;
+  }
+
+  .sidebar {
+    width: 220px;
+  }
+
+  .sidebar.sidebar-collapsed {
+    width: 96px;
+  }
+}
+
+@media (max-width: 1005px) {
+  .app-shell {
+    grid-template-columns: 200px 1fr;
+  }
+
+  .sidebar {
+    width: 200px;
+  }
+
+  .sidebar.sidebar-collapsed {
+    width: 96px;
+  }
 }
 
 @media (max-width: 991px) {
