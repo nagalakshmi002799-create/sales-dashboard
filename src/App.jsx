@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './App.css'
-import DashboardHeader from './components/DashboardHeader'
 import DashboardCharts from './components/DashboardCharts'
 import FilterPanel from './components/FilterPanel'
 import PerformancePanel from './components/PerformancePanel'
@@ -91,42 +90,7 @@ function App() {
         <div className="container-fluid px-0">
           <Topbar onRefresh={handleRefresh} />
 
-          <div ref={overviewRef} className="dashboard-hero row gx-4 gy-4 mb-4" id="overview">
-            <div className="col-12 col-xl-7">
-              <DashboardHeader
-                title="Sales Dashboard"
-                description="Monitor user growth, city filters, and customer performance with live dashboard data."
-              />
-            </div>
-            <div className="col-12 col-xl-5">
-              <section className="card banner-card shadow-sm h-100">
-                <div className="card-body">
-                  <div className="d-flex align-items-center justify-content-between mb-4">
-                    <div>
-                      <p className="text-uppercase text-muted mb-1 small">Revenue</p>
-                      <h3 className="mb-0">$34,500</h3>
-                    </div>
-                    <span className="badge bg-success bg-opacity-10 text-success py-2 px-3 rounded-pill">
-                      +12.4%
-                    </span>
-                  </div>
-                  <p className="text-muted mb-4">
-                    Revenue performance this week across all active user accounts and customer segments.
-                  </p>
-                  <div className="d-flex gap-3 flex-wrap">
-                    <div className="small-panel p-3 rounded-3 bg-light w-100">
-                      <p className="text-muted small mb-2">New users</p>
-                      <strong>32</strong>
-                    </div>
-                    <div className="small-panel p-3 rounded-3 bg-light w-100">
-                      <p className="text-muted small mb-2">Open orders</p>
-                      <strong>18</strong>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
+
 
           <SummaryCards summary={summary} />
 
