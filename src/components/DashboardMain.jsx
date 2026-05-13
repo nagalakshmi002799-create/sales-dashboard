@@ -1,5 +1,3 @@
-import SummaryCards from './SummaryCards'
-
 export default function DashboardMain() {
   // Sample data for charts
   const visitorData = [
@@ -27,8 +25,6 @@ export default function DashboardMain() {
 
   return (
     <div className="dashboard-main">
-      <SummaryCards />
-
       <div className="row gx-4 gy-4 mt-3">
         {/* Total Revenue */}
         <div className="col-12 col-lg-8">
@@ -190,38 +186,6 @@ export default function DashboardMain() {
         </div>
       </div>
 
-      <div className="row gx-4 gy-4 mt-2">
-        {/* Sales Mapping by Country */}
-        <div className="col-12 col-lg-6">
-          <div className="card shadow-sm h-100 border-0">
-            <div className="card-header border-0 py-3 px-4 bg-white">
-              <h5 className="mb-0 fw-bold">Sales Mapping by Country</h5>
-            </div>
-            <div className="card-body d-flex align-items-center justify-content-center" style={{ minHeight: '200px' }}>
-              <div className="text-center text-muted">
-                <p className="mb-0">Geographic sales distribution map</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Volume vs Service Level */}
-        <div className="col-12 col-lg-6">
-          <div className="card shadow-sm h-100 border-0">
-            <div className="card-header border-0 py-3 px-4 bg-white">
-              <h5 className="mb-0 fw-bold">Volume vs Service Level</h5>
-            </div>
-            <div className="card-body">
-              <svg viewBox="0 0 300 150" className="w-100" style={{ height: '120px' }}>
-                {/* Bars for volume */}
-                {[60, 45, 75, 55, 80, 65, 50].map((h, i) => (
-                  <rect key={`bar-${i}`} x={20 + i * 38} y={120 - h} width="30" height={h} fill="#10B981" />
-                ))}
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }

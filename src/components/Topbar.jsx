@@ -1,9 +1,20 @@
-export default function Topbar({ onRefresh }) {
+export default function Topbar({ onRefresh, onToggleSidebar }) {
   return (
     <div className="topbar d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3 mb-4">
-      <div>
-        <p className="text-uppercase text-muted mb-1 small">Dashboard</p>
-        <h2 className="mb-0">Sales overview</h2>
+      <div className="d-flex align-items-center gap-3">
+        <button
+          type="button"
+          className="btn btn-link sidebar-toggle-btn d-none"
+          onClick={onToggleSidebar}
+          aria-label="Toggle sidebar menu"
+          title="Toggle menu"
+        >
+          ☰
+        </button>
+        <div>
+          <p className="text-uppercase text-muted mb-1 small">Dashboard</p>
+          <h2 className="mb-0">Sales overview</h2>
+        </div>
       </div>
 
       <div className="d-flex flex-wrap align-items-center gap-2">

@@ -4,6 +4,7 @@ import './App.css'
 import DashboardCharts from './components/DashboardCharts'
 import FilterPanel from './components/FilterPanel'
 import Sidebar from './components/Sidebar'
+import SummaryCards from './components/SummaryCards'
 import Topbar from './components/Topbar'
 import UserTableSection from './components/UserTableSection'
 import DashboardMain from './components/DashboardMain'
@@ -70,6 +71,11 @@ function App() {
     }
 
     sectionMap[section]?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    
+    // Auto-close sidebar on mobile after navigation
+    if (window.innerWidth <= 991) {
+      setSidebarCollapsed(false)
+    }
   }
 
   return (
@@ -82,17 +88,10 @@ function App() {
       />
       <main className="main-content">
         <div className="container-fluid px-0">
-          <Topbar onRefresh={handleRefresh} />
+          <Topbar onRefresh={handleRefresh} onToggleSidebar={handleToggleSidebar} />
+          <SummaryCards />
 
-
-
-          <div ref={overviewRef} className="row gx-4 gy-4 mb-4" id="overview">
-            <div className="col-12">
-              <DashboardMain />
-            </div>
-          </div>
-
-          <div ref={customersRef} className="row gx-4 gy-4" id="customers">
+          <div ref={customersRef} className="row gx-4 gy-4 mb-4" id="customers">
             <div className="col-12">
               <FilterPanel
                 searchText={searchText}
@@ -106,6 +105,12 @@ function App() {
             </div>
             <div className="col-12">
               <UserTableSection loading={loading} error={error} users={filteredUsers} />
+            </div>
+          </div>
+
+          <div ref={overviewRef} className="row gx-4 gy-4 mb-4" id="overview">
+            <div className="col-12">
+              <DashboardMain />
             </div>
           </div>
 

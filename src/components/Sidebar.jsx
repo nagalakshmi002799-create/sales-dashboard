@@ -3,7 +3,6 @@ export default function Sidebar({ activeSection = 'overview', collapsed = false,
     { key: 'overview', label: 'Overview' },
     { key: 'customers', label: 'Customers' },
     { key: 'analytics', label: 'Analytics' },
-    { key: 'reports', label: 'Reports' },
   ]
 
   return (
