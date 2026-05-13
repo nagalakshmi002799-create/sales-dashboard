@@ -29,6 +29,10 @@ body {
   transition: width 0.3s ease, min-height 0.3s ease;
 }
 
+.sidebar.sidebar-collapsed {
+  width: 96px;
+}
+
 .main-content {
   flex: 1;
   background: transparent;
@@ -138,6 +142,17 @@ body {
 
 .sidebar.sidebar-collapsed .support-icon {
   margin: 0;
+}
+
+.sidebar.sidebar-collapsed .nav-text,
+.sidebar.sidebar-collapsed .sidebar-brand-info,
+.sidebar.sidebar-collapsed .sidebar-footer p {
+  display: none;
+}
+
+.sidebar.sidebar-collapsed .nav-link {
+  padding: 1rem 0.5rem;
+  justify-content: center;
 }
 
 .nav-icon {
