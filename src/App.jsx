@@ -3,12 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import './App.css'
 import DashboardCharts from './components/DashboardCharts'
 import FilterPanel from './components/FilterPanel'
-import PerformancePanel from './components/PerformancePanel'
-import ReportsPanel from './components/ReportsPanel'
 import Sidebar from './components/Sidebar'
-import SummaryCards from './components/SummaryCards'
 import Topbar from './components/Topbar'
 import UserTableSection from './components/UserTableSection'
+import DashboardMain from './components/DashboardMain'
 import {
   fetchUsers,
   selectCityOptions,
@@ -18,7 +16,6 @@ import {
   selectSearchText,
   selectSelectedCity,
   selectSortDirection,
-  selectSummary,
   selectUsers,
   setSearchText,
   setSelectedCity,
@@ -33,13 +30,11 @@ function App() {
   const overviewRef = useRef(null)
   const customersRef = useRef(null)
   const analyticsRef = useRef(null)
-  const reportsRef = useRef(null)
 
   const loading = useSelector(selectLoading)
   const error = useSelector(selectError)
   const filteredUsers = useSelector(selectFilteredUsers)
   const users = useSelector(selectUsers)
-  const summary = useSelector(selectSummary)
   const cityOptions = useSelector(selectCityOptions)
   const searchText = useSelector(selectSearchText)
   const selectedCity = useSelector(selectSelectedCity)
@@ -72,7 +67,6 @@ function App() {
       overview: overviewRef,
       customers: customersRef,
       analytics: analyticsRef,
-      reports: reportsRef,
     }
 
     sectionMap[section]?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -92,7 +86,11 @@ function App() {
 
 
 
-          <SummaryCards summary={summary} />
+          <div ref={overviewRef} className="row gx-4 gy-4 mb-4" id="overview">
+            <div className="col-12">
+              <DashboardMain />
+            </div>
+          </div>
 
           <div ref={customersRef} className="row gx-4 gy-4" id="customers">
             <div className="col-12">
@@ -112,17 +110,8 @@ function App() {
           </div>
 
           <div ref={analyticsRef} className="row gx-4 gy-4 mt-4" id="analytics">
-            <div className="col-12 col-xl-8">
-              <DashboardCharts users={users} />
-            </div>
-            <div className="col-12 col-xl-4">
-              <PerformancePanel />
-            </div>
-          </div>
-
-          <div ref={reportsRef} className="row gx-4 gy-4 mt-4" id="reports">
             <div className="col-12">
-              <ReportsPanel />
+              <DashboardCharts users={users} />
             </div>
           </div>
         </div>

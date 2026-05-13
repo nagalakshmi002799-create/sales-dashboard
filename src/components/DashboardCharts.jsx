@@ -9,54 +9,22 @@ export default function DashboardCharts({ users }) {
     .sort(([, a], [, b]) => b - a)
     .slice(0, 5)
 
-  const growthPoints = [5, 6, 7, 9, 9, 11, 13, 12, 14, 16]
-  const maxValue = Math.max(...growthPoints, 1)
   const maxCityValue = Math.max(...Object.values(cityCounts), 1)
 
   return (
-    <section className="card section-card shadow-sm h-100" id="analytics">
-      <div className="card-header border-0 bg-white py-3">
+    <section className="card section-card shadow-sm h-100 border-0" id="analytics">
+      <div className="card-header border-0 bg-white py-3 px-4">
         <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3">
           <div>
             <h3 className="mb-1">Analytics overview</h3>
-            <p className="text-muted mb-0">Track user activity, city distribution, and growth trends across the dashboard.</p>
+            <p className="text-muted mb-0">Track city distribution and user data across the dashboard.</p>
           </div>
-          <span className="badge bg-primary bg-opacity-10 text-primary py-2 px-3 rounded-pill">Data refreshed live</span>
         </div>
       </div>
 
       <div className="card-body">
         <div className="row gx-4 gy-4">
-          <div className="col-12 col-lg-7">
-            <div className="chart-card p-4 h-100">
-              <div className="d-flex justify-content-between align-items-center mb-3">
-                <div>
-                  <h5 className="mb-1">User growth</h5>
-                  <p className="text-muted small mb-0">Weekly active users trend</p>
-                </div>
-                <span className="text-success fw-semibold">+24% this month</span>
-              </div>
-              <div className="growth-chart">
-                <svg viewBox="0 0 220 100" preserveAspectRatio="none" className="chart-line">
-                  <polyline
-                    fill="none"
-                    stroke="#5f74ff"
-                    strokeWidth="3"
-                    points={growthPoints
-                      .map((value, index) => `${(index / (growthPoints.length - 1)) * 220},${100 - (value / maxValue) * 90}`)
-                      .join(' ')}
-                  />
-                </svg>
-                <div className="chart-labels d-flex justify-content-between text-muted small mt-2">
-                  {growthPoints.map((_, index) => (
-                    <span key={index}>W{index + 1}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-12 col-lg-5">
+          <div className="col-12">
             <div className="chart-card p-4 h-100">
               <div className="d-flex justify-content-between align-items-center mb-3">
                 <div>
